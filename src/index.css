@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3ddc97;
+  --primary-dark: #2a9d73;
+  --secondary: #f8bbd0;
+  --accent: #ff5c5c;
+  --background: #fff8a6;
+  --card: #ffffff;
+  --text: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Prompt', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Navbar Animation */
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo Rainbow Animation */
+@keyframes rainbowFast {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Form field transitions */
+input:focus, 
+textarea:focus, 
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(61, 220, 151, 0.5);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-[#3ddc97] hover:bg-[#2a9d73] text-white font-semibold py-2 px-4 rounded-full 
+  transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-[#f2994a] hover:bg-[#d9770c] text-white font-semibold py-2 px-4 rounded-full 
+  transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
+}
+
+.btn-dark {
+  @apply bg-[#2c2c2c] hover:bg-[#444444] text-white font-semibold py-2 px-4 rounded-full 
+  transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
+}
+
+/* Rainbow text */
+.rainbow-text {
+  background: linear-gradient(
+    270deg,
+    red, orange, yellow, lime, cyan, blue, violet,
+    white, black,
+    red, orange, yellow, lime, cyan, blue, violet
+  );
+  background-size: 1800% 1800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowFast 5s linear infinite;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+}
+
+/* Input fields */
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:border-[#3ddc97] 
+  focus:ring focus:ring-[#3ddc97] focus:ring-opacity-50 transition-all duration-300;
+}
+
+/* Form container */
+.form-container {
+  @apply bg-[#f8bbd0] rounded-3xl p-8 shadow-lg max-w-md w-full transition-all duration-300 hover:shadow-xl;
+}
+
+@keyframes pastelRainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(270deg,
+    #f8c4ec,   /* pink pastel */
+    #d7c4f8,   /* purple pastel */
+    #c4d9f8,   /* blue pastel */
+    #c4f8e1,   /* green pastel */
+    #f8f7c4,   /* yellow pastel */
+    #f8d4a8,   /* orange pastel */
+    #f8c4c4    /* red pastel */
+  );
+  background-size: 1400% 1400%;
+  animation: pastelRainbow 10s ease infinite;
+}
+/* เพิ่ม padding-top เพื่อเว้นระยะ Navbar จากส่วนบนสุดของหน้า */
+.page-container {
+  padding-top: 80px; /* ปรับค่าตามความต้องการ */
+}
