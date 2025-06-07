@@ -1951,7 +1951,7 @@ const mockRecipes: Recipe[] =
       "เตรียมหน่อไม้: หากใช้หน่อไม้ดิบ ให้ต้มก่อน 1-2 รอบ เพื่อลดกลิ่นฉุนและความขม แล้วล้างน้ำสะอาด"
     ],
     "videoUrl": "https://youtu.be/7Tpgli65QmY?si=xxJkvWsQf1wp1KaN",
-    "diet_type": "อาหารเจ"
+    "diet_type": "โปรตีนสูง"
   },
   {
     "id": "110",

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecipeStore } from '../store/recipeStore';
 import RecipeCard from '../components/recipe/RecipeCard';
-import { Search, X } from 'lucide-react';
+import { Search, X, Menu } from 'lucide-react';
 
 const SearchResultsPage = () => {
   const location = useLocation();
@@ -13,6 +13,8 @@ const SearchResultsPage = () => {
   const decodedSearchQuery = decodeURIComponent(searchQueryRaw);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
   const { searchRecipes, searchResults } = useRecipeStore();
 
   const filters = [
@@ -48,12 +50,22 @@ const SearchResultsPage = () => {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">ผลการค้นหา</h1>
 
-        <div className="flex row:flex-row gap-8">
-          {/* Filters */}
-          <div className="w-64 flex-shrink-0">
+        {/* ปุ่มตัวกรองสำหรับ Mobile - ย้ายไปด้านซ้าย */}
+        <div className="lg:hidden mb-4 flex justify-start">
+          <button
+            onClick={() => setMobileFilterOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-full shadow"
+          >
+            <Menu size={20} />
+            ตัวกรอง
+          </button>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* ตัวกรอง - Desktop */}
+          <div className="w-64 flex-shrink-0 hidden lg:block">
             <div className="bg-secondary rounded-xl p-4 sticky top-24">
               <h2 className="text-xl font-bold mb-4">ตัวกรอง</h2>
-
               <div className="space-y-3">
                 {filters.map(filter => (
                   <button
@@ -68,7 +80,6 @@ const SearchResultsPage = () => {
                     {filter}
                   </button>
                 ))}
-
                 <button
                   onClick={() => setSelectedFilters([])}
                   className="mt-4 w-full py-2 px-4 rounded-full bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors duration-300"
@@ -78,6 +89,42 @@ const SearchResultsPage = () => {
               </div>
             </div>
           </div>
+
+          {/* ตัวกรอง - Mobile Overlay */}
+          {mobileFilterOpen && (
+            <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-start justify-start p-4 lg:hidden">
+              <div className="bg-white w-80 max-w-full h-full rounded-lg shadow-lg p-6 overflow-y-auto relative">
+                <button
+                  className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+                  onClick={() => setMobileFilterOpen(false)}
+                >
+                  <X size={24} />
+                </button>
+                <h2 className="text-xl font-bold mb-4">ตัวกรอง</h2>
+                <div className="space-y-3">
+                  {filters.map(filter => (
+                    <button
+                      key={filter}
+                      className={`w-full py-2 px-4 rounded-full text-left transition-colors duration-300 ${
+                        selectedFilters.includes(filter)
+                          ? 'bg-[#ff69b4] text-white'
+                          : 'bg-white border-2 border-[#ff69b4] hover:bg-pink-100'
+                      }`}
+                      onClick={() => toggleFilter(filter)}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => setSelectedFilters([])}
+                    className="mt-4 w-full py-2 px-4 rounded-full bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors duration-300"
+                  >
+                    ล้างตัวกรองทั้งหมด
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Search Results */}
           <div className="flex-1">
